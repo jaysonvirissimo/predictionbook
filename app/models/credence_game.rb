@@ -46,7 +46,7 @@ class CredenceGame < ApplicationRecord
   end
 
   def create_new_response_to_random_question
-    enabled_questions = CredenceQuestion.where(enabled: true)
+    enabled_questions = CredenceQuestion.enabled
     enabled_question_count = enabled_questions.count
     return if enabled_question_count.zero?
 

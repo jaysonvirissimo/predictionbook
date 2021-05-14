@@ -5,6 +5,17 @@ require 'spec_helper'
 describe CredenceQuestion do
   let(:game) { FactoryBot.create(:credence_game) }
 
+  describe '.enabled' do
+    subject { described_class.enabled }
+
+    it 'hides disabled questions' do
+      enabled = FactoryBot.create(:credence_question, enabled: true)
+      disabled = FactoryBot.create(:credence_question, enabled: false)
+      expect(subject).to include(enabled)
+      expect(subject).to_not include(disabled)
+    end
+  end
+
   it 'is able to create random questions' do
     question = FactoryBot.create(:credence_question)
     (0..9).each do |rank|
